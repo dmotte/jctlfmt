@@ -44,7 +44,7 @@ class Entry:
         self.unit: str = raw.get('_SYSTEMD_UNIT', '')
         'Systemd unit name'
 
-        self.ident: str = raw['SYSLOG_IDENTIFIER']
+        self.ident: str = raw.get('SYSLOG_IDENTIFIER', '')
         'Syslog identifier'
 
         self.pid: str = raw.get('_PID', '')
@@ -59,21 +59,19 @@ class Entry:
     @property
     def str_ui(self):
         '''
-        Returns `(unit) ident` or just `ident` if unit is empty
+        Returns `(unit) ident` omitting the empty parts
         '''
         if self.unit == '':
             return self.ident
+        elif self.ident == '':
+            return f'({self.unit})'
         else:
             return f'({self.unit}) {self.ident}'
 
     @property
     def str_uip(self):
         '''
-        Returns:
-        - `(unit) ident[pid]` or
-        - `(unit) ident` if pid is empty, or
-        - `ident[pid]` if unit is empty, or
-        - `ident` if unit and pid are both empty
+        Returns `(unit) ident[pid]` omitting the empty parts
         '''
         if self.pid == '':
             return self.str_ui
