@@ -36,6 +36,15 @@ sudo journalctl -ojson -ussh -S '1 day ago' | python3 example/fmt.py -fs | less
 
 As you can see, this time I invoked the script with `-fs` to disable filtering and sensitive mode. See `jctlfmt.BaseFormatter` for details.
 
+You can customize [`fmt.py`](example/fmt.py) as you want and then use it in your setup. If you make modifications to the script and you want to test if the output is consistent, you can generate the output for all the possible invocations and then use `sha256sum` to check. The following commands may help:
+
+```bash
+for i in '' -f -fs -s; do
+    python3 example/fmt.py $i < example/step02-dedup.txt > "example/step03-arg$i.txt"
+done
+sha256sum example/step03-arg*.txt | sha256sum
+```
+
 ## Development
 
 If you want to contribute to this project, you can install the package in **editable** mode:
