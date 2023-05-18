@@ -56,7 +56,7 @@ class Entry:
         self.msg: str = (
             bytes(raw['MESSAGE']).decode() if isinstance(raw['MESSAGE'], list)
             else raw['MESSAGE']
-        )
+        ).strip()
         'Message text'
 
     @property
