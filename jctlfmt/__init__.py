@@ -53,7 +53,10 @@ class Entry:
         self.prio = int(raw.get('PRIORITY', -1))
         'Priority of the message (as int)'
 
-        self.msg: str = raw['MESSAGE']
+        self.msg: str = (
+            bytes(raw['MESSAGE']).decode() if isinstance(raw['MESSAGE'], list)
+            else raw['MESSAGE']
+        )
         'Message text'
 
     @property
