@@ -30,7 +30,8 @@ class Entry:
     def __init__(self, line: str):
         raw = json.loads(line)
 
-        # See https://www.freedesktop.org/software/systemd/man/systemd.journal-fields.html
+        # For more info about the systemd journal JSON format, see
+        # https://www.freedesktop.org/software/systemd/man/systemd.journal-fields.html
 
         self.datetime = dt.fromtimestamp(int(raw.get(
             '_SOURCE_REALTIME_TIMESTAMP',

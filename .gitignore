@@ -1,8 +1,13 @@
+/venv/
+
 /jctlfmt/__pycache__/
+/test/__pycache__/
 
 /build/
 /dist/
 
 /*.egg-info/
+
+/.pytest_cache/
 
 /example/step*.txt

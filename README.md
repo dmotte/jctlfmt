@@ -1,5 +1,6 @@
 # jctlfmt
 
+[![GitHub main workflow](https://img.shields.io/github/actions/workflow/status/dmotte/jctlfmt/main.yml?branch=main&logo=github&label=main&style=flat-square)](https://github.com/dmotte/jctlfmt/actions)
 [![PyPI](https://img.shields.io/pypi/v/jctlfmt?logo=python&style=flat-square)](https://pypi.org/project/jctlfmt/)
 
 :snake: Python **Journalctl parsing** and **formatting** library.
