@@ -12,7 +12,7 @@ With this library you can create custom scripts to **parse**, **filter** and **t
 This library is available as a Python package on **PyPI**:
 
 ```bash
-pip3 install jctlfmt
+python3 -mpip install jctlfmt
 ```
 
 ## Usage
@@ -51,7 +51,7 @@ sha256sum example/step03-arg*.txt | sha256sum
 If you want to contribute to this project, you can install the package in **editable** mode:
 
 ```bash
-pip3 install -e . --user
+python3 -mpip install -e . --user
 ```
 
 This will just link the package to the original location, basically meaning any changes to the original package would reflect directly in your environment ([source](https://stackoverflow.com/a/35064498)).
