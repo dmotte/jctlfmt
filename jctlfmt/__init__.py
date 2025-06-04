@@ -28,6 +28,9 @@ class Entry:
     '''
 
     def __init__(self, line: str):
+        self.line = line
+        'Original line in JSON format'
+
         raw = json.loads(line)
 
         # For more info about the systemd journal JSON format, see
