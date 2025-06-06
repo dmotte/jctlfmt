@@ -170,6 +170,8 @@ def exec(class_fmtr, argv=None):
                         help='Disable filtering')
     parser.add_argument('-s', '--no-sensitive', action='store_true',
                         help='Disable sensitive mode')
+    parser.add_argument('-j', '--json-output', action='store_true',
+                        help='JSON output mode')
 
     args = parser.parse_args(argv[1:])
 
@@ -178,8 +180,13 @@ def exec(class_fmtr, argv=None):
     for line in sys.stdin:
         text = fmtr.fmt(Entry(line))
 
-        if text is not None:
-            print(text)
+        if args.json_output:
+            json.dump(text, sys.stdout)
+            print()
             sys.stdout.flush()
+        else:
+            if text is not None:
+                print(text)
+                sys.stdout.flush()
 
     return 0
