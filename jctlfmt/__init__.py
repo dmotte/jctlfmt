@@ -3,8 +3,10 @@
 import argparse
 import json
 import sys
+
 from datetime import datetime as dt
 from enum import IntEnum
+from typing import TextIO
 
 
 class Prio(IntEnum):
@@ -160,7 +162,8 @@ class BaseFormatter:
         return self.fmt_nopid_nomsg(x)
 
 
-def exec(class_fmtr, argv=None):
+def exec(class_fmtr, argv=None,
+         file_in: TextIO = sys.stdin, file_out: TextIO = sys.stdout):
     if argv is None:
         argv = sys.argv
 
@@ -177,16 +180,16 @@ def exec(class_fmtr, argv=None):
 
     fmtr = class_fmtr(not args.no_filter, not args.no_sensitive)
 
-    for line in sys.stdin:
+    for line in file_in:
         text = fmtr.fmt(Entry(line))
 
         if args.json_output:
-            json.dump(text, sys.stdout)
-            print()
-            sys.stdout.flush()
+            json.dump(text, file_out)
+            print(file=file_out)
+            file_out.flush()
         else:
             if text is not None:
-                print(text)
-                sys.stdout.flush()
+                print(text, file=file_out)
+                file_out.flush()
 
     return 0
