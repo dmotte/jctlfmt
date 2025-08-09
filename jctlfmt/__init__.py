@@ -29,7 +29,7 @@ class Entry:
     message in JSON format as parameter
     '''
 
-    def __init__(self, line: str):
+    def __init__(self, line: str) -> None:
         self.line = line
         'Original line in JSON format'
 
@@ -66,7 +66,7 @@ class Entry:
         'Message text'
 
     @property
-    def str_ui(self):
+    def str_ui(self) -> str:
         '''
         Returns `(unit) ident` omitting the empty parts
         '''
@@ -78,7 +78,7 @@ class Entry:
             return f'({self.unit}) {self.ident}'
 
     @property
-    def str_uip(self):
+    def str_uip(self) -> str:
         '''
         Returns `(unit) ident[pid]` omitting the empty parts
         '''
@@ -88,7 +88,7 @@ class Entry:
             return f'{self.str_ui}[{self.pid}]'
 
     @property
-    def str_pm(self):
+    def str_pm(self) -> str:
         '''
         Returns `<prio>msg` with prio as int (e.g. `<6>Hello world`)
         '''
@@ -100,7 +100,7 @@ class BaseFormatter:
     Base class for formatters
     '''
 
-    def __init__(self, en_filt: bool = True, en_sens: bool = True):
+    def __init__(self, en_filt: bool = True, en_sens: bool = True) -> None:
         self.en_filt = en_filt
         'Whether or not to enable filtering'
 
@@ -163,7 +163,7 @@ class BaseFormatter:
 
 
 def exec(class_fmtr, argv=None,
-         file_in: TextIO = sys.stdin, file_out: TextIO = sys.stdout):
+         file_in: TextIO = sys.stdin, file_out: TextIO = sys.stdout) -> int:
     if argv is None:
         argv = sys.argv
 

@@ -6,7 +6,7 @@ import sys
 import jctlfmt
 
 
-def main():
+def main() -> int:
     seen = []
 
     for line in sys.stdin:
