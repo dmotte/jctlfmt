@@ -26,7 +26,7 @@ class Formatter(jctlfmt.BaseFormatter):
         return self.fmt_nopid_nomsg(x)
 
 
-def main(argv: list[str] = None) -> int:
+def main(argv: list[str] | None = None) -> int:
     return jctlfmt.exec(Formatter, argv)
 
 
