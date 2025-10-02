@@ -57,7 +57,7 @@ class Entry:
         'Process ID'
 
         self.prio = int(raw.get('PRIORITY', -1))
-        'Priority of the message (as int)'
+        'Priority of the message (as `int`)'
 
         self.msg: str = (
             bytes(raw['MESSAGE']).decode() if isinstance(raw['MESSAGE'], list)
@@ -109,13 +109,13 @@ class BaseFormatter:
 
     def fmt_full(self, x: Entry) -> str:
         '''
-        Gets the full representation of the entry x
+        Gets the full representation of the entry `x`
         '''
         return f'{x.datetime} {x.hostname} {x.str_uip}: {x.str_pm}'
 
     def fmt_nopid(self, x: Entry) -> str:
         '''
-        Gets the representation of the entry x omitting the pid if sensitive
+        Gets the representation of the entry `x` omitting the pid if sensitive
         mode is enabled, or the full representation if sensitive mode is
         disabled
         '''
@@ -125,8 +125,8 @@ class BaseFormatter:
 
     def fmt_nopid_msg(self, x: Entry, msg: str) -> str:
         '''
-        Gets the representation of the entry x omitting the pid and using the
-        custom message msg if sensitive mode is enabled, or the full
+        Gets the representation of the entry `x` omitting the pid and using the
+        custom message `msg` if sensitive mode is enabled, or the full
         representation if sensitive mode is disabled
         '''
         if not self.en_sens:
@@ -135,7 +135,7 @@ class BaseFormatter:
 
     def fmt_nopid_nomsg(self, x: Entry) -> str:
         '''
-        Gets the representation of the entry x omitting pid and message if
+        Gets the representation of the entry `x` omitting pid and message if
         sensitive mode is enabled, or the full representation if sensitive mode
         is disabled
         '''
@@ -145,7 +145,7 @@ class BaseFormatter:
 
     def fmt_none(self, x: Entry) -> str | None:
         '''
-        Returns None if filtering is enabled, or fmt_nopid_nomsg(x) if
+        Returns `None` if filtering is enabled, or `fmt_nopid_nomsg(x)` if
         filtering is disabled
         '''
         if self.en_filt:
@@ -154,7 +154,7 @@ class BaseFormatter:
 
     def fmt(self, x: Entry) -> str | None:
         '''
-        Like fmt_nopid_nomsg but filters lines with prio == Prio.DEBUG. This
+        Like `fmt_nopid_nomsg` but filters lines with `prio == Prio.DEBUG`. This
         method is meant to be overridden by a derived class
         '''
         if x.prio == Prio.DEBUG:
