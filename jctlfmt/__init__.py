@@ -145,7 +145,7 @@ class BaseFormatter:
 
     def fmt_none(self, x: Entry) -> str | None:
         '''
-        Returns `None` if filtering is enabled, or `fmt_nopid_nomsg(x)` if
+        Returns `None` if filtering is enabled, or `self.fmt_nopid_nomsg(x)` if
         filtering is disabled
         '''
         if self.en_filt:
@@ -154,8 +154,9 @@ class BaseFormatter:
 
     def fmt(self, x: Entry) -> str | None:
         '''
-        Like `fmt_nopid_nomsg` but filters lines with `prio == Prio.DEBUG`. This
-        method is meant to be overridden by a derived class
+        Like `self.fmt_nopid_nomsg` but filters lines with
+        `prio == Prio.DEBUG`. This method is meant to be overridden by a
+        derived class
         '''
         if x.prio == Prio.DEBUG:
             return self.fmt_none(x)
