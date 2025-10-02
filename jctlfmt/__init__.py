@@ -143,6 +143,13 @@ class BaseFormatter:
             return self.fmt_full(x)
         return f'{x.datetime} {x.hostname} {x.str_ui}: <{x.prio}>'
 
+    def fmt_unknown(self, x: Entry) -> str:
+        '''
+        Invokes `self.fmt_nopid_msg` with custom message `???` (three
+        question marks)
+        '''
+        return self.fmt_nopid_msg(x, '???')
+
     def fmt_none(self, x: Entry) -> str | None:
         '''
         Returns `None` if filtering is enabled, or `self.fmt_nopid_nomsg(x)` if
