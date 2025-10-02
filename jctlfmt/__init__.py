@@ -143,7 +143,7 @@ class BaseFormatter:
             return self.fmt_full(x)
         return f'{x.datetime} {x.hostname} {x.str_ui}: <{x.prio}>'
 
-    def fmt_none(self, x: Entry) -> str:
+    def fmt_none(self, x: Entry) -> str | None:
         '''
         Returns None if filtering is enabled, or fmt_nopid_nomsg(x) if
         filtering is disabled
@@ -152,7 +152,7 @@ class BaseFormatter:
             return None
         return self.fmt_nopid_nomsg(x)
 
-    def fmt(self, x: Entry) -> str:
+    def fmt(self, x: Entry) -> str | None:
         '''
         Like fmt_nopid_nomsg but filters lines with prio == Prio.DEBUG. This
         method is meant to be overridden by a derived class

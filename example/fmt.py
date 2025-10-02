@@ -7,7 +7,7 @@ from jctlfmt import Prio
 
 
 class Formatter(jctlfmt.BaseFormatter):
-    def fmt(self, x: jctlfmt.Entry) -> str:
+    def fmt(self, x: jctlfmt.Entry) -> str | None:
         if x.str_uip == 'kernel':
             if x.prio >= Prio.INFO:
                 return self.fmt_none(x)
