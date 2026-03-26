@@ -61,6 +61,10 @@ class Entry:
 
         self.msg: str = (
             bytes(raw['MESSAGE']).decode() if isinstance(raw['MESSAGE'], list)
+
+            # This might happen if the message is too large
+            else "" if raw['MESSAGE'] is None
+
             else raw['MESSAGE']
         ).strip()
         'Message text'
