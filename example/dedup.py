@@ -12,7 +12,7 @@ def main() -> int:
     for line in sys.stdin:
         x = jctlfmt.Entry(line)
 
-        if re.fullmatch(r'^session-[0-9]+\.scope$', x.unit):
+        if re.fullmatch(r'\Asession-[0-9]+\.scope\Z', x.unit):
             uniqstr = f'(session-123.scope) {x.ident}: {x.str_pm}'
         else:
             uniqstr = f'{x.str_ui}: {x.str_pm}'
