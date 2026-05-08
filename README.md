@@ -51,8 +51,8 @@ sha256sum example/step03-arg*.txt | sha256sum
 If you want to contribute to this project, you can create a Python **virtual environment** ("venv") with the package in **editable** mode:
 
 ```bash
-python3 -mvenv venv
-venv/bin/python3 -mpip install -e .
+python3 -mvenv .venv
+.venv/bin/python3 -mpip install -e .
 ```
 
 This will link the package to the original location, so any changes to the code will reflect directly in your environment ([source](https://stackoverflow.com/a/35064498)).
