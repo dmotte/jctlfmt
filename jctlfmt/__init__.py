@@ -53,11 +53,6 @@ class Entry:
         self.unit_user: str = raw.get('_SYSTEMD_USER_UNIT', '')
         'Systemd user unit name'
 
-        self.unit: str = (
-            f'{self.unit_system}/{self.unit_user}' if self.unit_user != ''
-            else self.unit_system)
-        'Systemd system unit + user unit if any (separated by slash "/")'
-
         self.ident: str = raw.get('SYSLOG_IDENTIFIER', '')
         'Syslog identifier'
 
@@ -77,34 +72,26 @@ class Entry:
         ).strip()
         'Message text'
 
-    @property
-    def str_ui(self) -> str:
-        '''
-        Returns `(unit) ident` omitting the empty parts
-        '''
-        if self.unit == '':
-            return self.ident
-        elif self.ident == '':
-            return f'({self.unit})'
-        else:
-            return f'({self.unit}) {self.ident}'
+        ########################################################################
 
-    @property
-    def str_uip(self) -> str:
+        self.unit: str = (self.unit_system if self.unit_user == ''
+                          else f'{self.unit_system}/{self.unit_user}')
         '''
-        Returns `(unit) ident[pid]` omitting the empty parts
+        Systemd **system** unit name, followed by a slash ("/") and the
+        systemd **user** unit name if the latter is not empty
         '''
-        if self.pid == '':
-            return self.str_ui
-        else:
-            return f'{self.str_ui}[{self.pid}]'
 
-    @property
-    def str_pm(self) -> str:
-        '''
-        Returns `<prio>msg` with prio as int (e.g. `<6>Hello world`)
-        '''
-        return f'<{self.prio}>{self.msg}'
+        self.str_ui: str = (self.ident if self.unit == ''
+                            else f'({self.unit})' if self.ident == ''
+                            else f'({self.unit}) {self.ident}')
+        'String `(unit) ident` omitting the empty parts'
+
+        self.str_uip: str = (self.str_ui if self.pid == ''
+                             else f'{self.str_ui}[{self.pid}]')
+        'String `(unit) ident[pid]` omitting the empty parts'
+
+        self.str_pm: str = f'<{self.prio}>{self.msg}'
+        'String `<prio>msg` with prio as int (e.g. `<6>Hello world`)'
 
 
 class BaseFormatter:
