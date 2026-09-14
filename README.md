@@ -22,7 +22,7 @@ You can use the `jctlfmt.Entry` class in your code to **parse** _Journalctl_ mes
 There is a full usage example in the [`example`](example) folder of this repo. To try it you can use the following commands:
 
 ```bash
-ssh myuser@myserver.example.com "sudo journalctl -ojson --output-fields _SOURCE_REALTIME_TIMESTAMP,__REALTIME_TIMESTAMP,_HOSTNAME,_SYSTEMD_UNIT,SYSLOG_IDENTIFIER,_PID,PRIORITY,MESSAGE -S '1 day ago'" > example/step01-json.txt
+ssh myuser@myserver.example.com "sudo journalctl -ojson --output-fields _SOURCE_REALTIME_TIMESTAMP,__REALTIME_TIMESTAMP,_HOSTNAME,_SYSTEMD_UNIT,_SYSTEMD_USER_UNIT,SYSLOG_IDENTIFIER,_PID,PRIORITY,MESSAGE -S '1 day ago'" > example/step01-json.txt
 python3 example/dedup.py < example/step01-json.txt > example/step02-dedup.txt
 python3 example/fmt.py < example/step02-dedup.txt > example/step03-fmt.txt
 ```

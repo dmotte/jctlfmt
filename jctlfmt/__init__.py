@@ -36,7 +36,7 @@ class Entry:
         raw = json.loads(line)
 
         # For more info about the systemd journal JSON format, see
-        # https://www.freedesktop.org/software/systemd/man/systemd.journal-fields.html
+        # https://www.freedesktop.org/software/systemd/man/latest/systemd.journal-fields.html
 
         self.datetime = dt.fromtimestamp(int(raw.get(
             '_SOURCE_REALTIME_TIMESTAMP',
@@ -47,8 +47,16 @@ class Entry:
         self.hostname: str = raw['_HOSTNAME']
         'Name of the host that generated the journal message'
 
-        self.unit: str = raw.get('_SYSTEMD_UNIT', '')
-        'Systemd unit name'
+        self.unit_system: str = raw.get('_SYSTEMD_UNIT', '')
+        'Systemd system unit name'
+
+        self.unit_user: str = raw.get('_SYSTEMD_USER_UNIT', '')
+        'Systemd user unit name'
+
+        self.unit: str = (
+            f'{self.unit_system}/{self.unit_user}' if self.unit_user != ''
+            else self.unit_system)
+        'Systemd system unit + user unit if any (separated by slash "/")'
 
         self.ident: str = raw.get('SYSLOG_IDENTIFIER', '')
         'Syslog identifier'
