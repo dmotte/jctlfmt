@@ -11,13 +11,15 @@ class Formatter(jctlfmt.BaseFormatter):
         if x.str_uip == 'kernel':
             if x.prio >= Prio.INFO:
                 return self.fmt_none(x)
-            elif x.prio == Prio.NOTICE and not x.msg.startswith('Linux version '):
+            if x.prio == Prio.NOTICE and not x.msg.startswith('Linux version '):
                 return self.fmt_none(x)
 
             if x.str_pm.startswith('<5>Linux version '):
                 return self.fmt_nopid_msg(x, 'Linux version ...')
 
-        elif x.str_ui == '(myapp.service) myapp':
+            return self.fmt_nopid_nomsg(x)
+
+        if x.str_ui == '(myapp.service) myapp':
             if x.prio >= Prio.INFO:
                 return self.fmt_none(x)
 
